@@ -1,0 +1,18 @@
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f7fa;
+  color: #303133;
+}
+.page-card { background: #fff; border-radius: 6px; padding: 16px 18px; margin-bottom: 12px; }
+.page-title { font-size: 16px; font-weight: 600; color: #0b3d91; margin: 0 0 12px; }
+.mono { font-family: Consolas, Monaco, monospace; }
+.tag-high { color: #c62828; font-weight: 600; }
+.tag-mid { color: #e07b00; font-weight: 600; }
+.tag-low { color: #1565c0; font-weight: 600; }
+.el-table .warning-row td { background: #fff4f4 !important; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.stat-card { background: #fff; border-radius: 6px; padding: 14px 16px; border: 1px solid #eef1f6; }
+.stat-card .label { font-size: 13px; color: #7b8794; }
+.stat-card .value { font-size: 26px; font-weight: 700; margin-top: 6px; }
+.el-form-item__label { white-space: nowrap; }

@@ -1,0 +1,7 @@
+# 使用预先构建好的 dist（frontend/dist），无需 node 镜像
+ARG BASE_PREFIX=
+FROM ${BASE_PREFIX}nginx:1.27-alpine
+ENV TZ=Asia/Shanghai
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist /usr/share/nginx/html
+EXPOSE 80

@@ -1,0 +1,5 @@
+# 源码构建不需要 target，但预构建模式需要 jar
+target/*
+!target/blued-api.jar
+.idea/
+*.iml

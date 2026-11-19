@@ -1,0 +1,3 @@
+# 依赖不进上下文；dist 需要（预构建模式直接用）
+node_modules/
+.idea/

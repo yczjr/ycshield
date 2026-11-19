@@ -1,0 +1,92 @@
+name: blued
+
+services:
+  mysql:
+    image: ${IMAGE_PREFIX:-}mysql:8.0
+    container_name: blued-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-blued123456}
+      MYSQL_DATABASE: blued
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_general_ci
+      - --default-time-zone=+08:00
+      - --max_allowed_packet=256M
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$DB_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 40s
+    logging: { driver: json-file, options: { max-size: "20m", max-file: "3" } }
+
+  redis:
+    image: ${IMAGE_PREFIX:-}redis:7-alpine
+    container_name: blued-redis
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - ./data/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prebuilt
+      args:
+        BASE_PREFIX: ${IMAGE_PREFIX:-}
+    container_name: blued-api
+    restart: always
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: blued
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD:-blued123456}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-blued-blueshield-change-me}
+      UPLOAD_DIR: /data/upload
+      IP_DB: /data/ip2region.xdb
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@Blued2025}
+      TZ: Asia/Shanghai
+    volumes:
+      - ./data/upload:/data/upload
+      - ./data/ip2region.xdb:/data/ip2region.xdb:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8081/api/v1/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    logging: { driver: json-file, options: { max-size: "20m", max-file: "3" } }
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prebuilt
+      args:
+        BASE_PREFIX: ${IMAGE_PREFIX:-}
+    container_name: blued-web
+    restart: always
+    ports:
+      - "${WEB_PORT:-8090}:80"
+    depends_on:
+      api:
+        condition: service_started
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }

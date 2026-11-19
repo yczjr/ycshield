@@ -1,0 +1,9 @@
+# 使用预先构建好的 jar（backend/target/blued-api.jar），无需 maven 镜像
+ARG BASE_PREFIX=
+FROM ${BASE_PREFIX}eclipse-temurin:17-jre-alpine
+ENV TZ=Asia/Shanghai \
+    JAVA_OPTS="-Xms256m -Xmx768m -Duser.timezone=Asia/Shanghai"
+WORKDIR /app
+COPY target/blued-api.jar app.jar
+EXPOSE 8081
+ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar /app/app.jar"]
