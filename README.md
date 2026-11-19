@@ -14,6 +14,8 @@
 - 来源设备、设备名称走**管理员预设字典**，下拉选择
 - 原始报文粘贴、截图直接 `Ctrl+V` 粘贴为附件
 - 提交前自动检测疑似重复事件
+  <img width="3074" height="1624" alt="24c4152998db5a2a19ffb89f74f5fad7" src="https://github.com/user-attachments/assets/d07e9d3b-6a8b-4f2b-9754-9c3ba8439372" />
+  <img width="3074" height="1624" alt="24c4152998db5a2a19ffb89f74f5fad7" src="https://github.com/user-attachments/assets/9f975639-9b81-4176-9a18-c0f56ed9531e" />
 
 **分析员（研判台）**
 - 待认领 / 研判中两个队列，一键认领
@@ -23,16 +25,24 @@
   - **研判办结归档**：一般扫描、攻击未成功等，无需处置，直接结束
   - **直接封禁 IP 结案**：恶意扫描源就地封禁（不接入设备，仅记录决定）
   - **转应急处置**：确实需要应急时，才指派处置员
+  <img width="3032" height="940" alt="9752df94edee1a6798fbc359b1d3d9db" src="https://github.com/user-attachments/assets/24e831c5-50a9-48d8-856d-3d5ccfdb9090" />
 
 **处置员（处置台）**
 - 我的待处置 / 待复核队列
 - 结构化处置记录：处置动作、处置对象、执行设备、执行时间、生效时间、验证结果
 - 提交复核
+  <img width="3068" height="1112" alt="1e50e6064dc19215a6094ca470268950" src="https://github.com/user-attachments/assets/6b60487e-52fc-4834-a8eb-60564f8d3b41" />
 
 **管理员**
 - **态势感知大屏**（全屏深色）：中国地图攻击源热力 + 涟漪点、14 天威胁趋势、类型/等级/方向分布、攻击源 IP TOP10、境外来源 TOP、受害资产 TOP、实时事件流，20 秒自动刷新
 - 字典管理（攻击类型、来源设备、设备名称、处置动作等全部可改，改完即时生效）
 - 用户管理、角色分配
+<img width="3106" height="1850" alt="44e777bbf5372b6ded2aefbd6a872e80" src="https://github.com/user-attachments/assets/8211e9d8-9fbb-479c-aed4-d6b18d8247de" />
+<img width="3060" height="1142" alt="0575466075f51cbd35d9df112a1f56f6" src="https://github.com/user-attachments/assets/532b8820-7f1c-41da-ac38-04bd725942bf" />
+<img width="2988" height="1614" alt="55bfeb72dc536fd138c328a7a43b2b62" src="https://github.com/user-attachments/assets/8119751d-3db7-4665-aa78-676ef1399999" />
+<img width="3082" height="1698" alt="25f377bbc11517f3bbdc88a20bd353ea" src="https://github.com/user-attachments/assets/b43a481b-7dfb-4569-9d67-39035f17eb55" />
+<img width="3042" height="1516" alt="87c6f954efb8cb04e9f576e81fd11f9f" src="https://github.com/user-attachments/assets/587e0280-5485-49eb-8804-f46b1fab4e62" />
+
 
 **通用**
 - JWT 鉴权 + 四角色权限控制
